@@ -22,6 +22,8 @@ public class MainActivity extends Activity {
 		
 		Toast.makeText(MainActivity.this, " !!Hello World 11Bir1111!!!!",
 				Toast.LENGTH_SHORT).show();
+		Toast.makeText(MainActivity.this, " !!Hello World 11B22222!!!!",
+				Toast.LENGTH_SHORT).show();
 
 	}
 
