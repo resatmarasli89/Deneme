@@ -19,6 +19,9 @@ public class MainActivity extends Activity {
 
 		Countly.sharedInstance().init(MainActivity.this,
 				"https://cloud.count.ly", "53033767172bb08c52038fb6");
+		
+		Toast.makeText(MainActivity.this, " !!Hello World 11Bir1111!!!!",
+				Toast.LENGTH_SHORT).show();
 
 	}
 
