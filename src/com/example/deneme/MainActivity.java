@@ -1,16 +1,22 @@
 package com.example.deneme;
 
-import android.app.TabActivity;
-import android.content.Intent;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 
-import com.example.tabs.SampleClass1;
-import com.example.tabs.SampleClass2;
-import com.example.tabs.SampleClass3;
+import com.example.adapters.TabsPagerAdapter;
 
-public class MainActivity extends TabActivity {
+public class MainActivity extends FragmentActivity implements
+		ActionBar.TabListener {
+
+	private ViewPager viewPager;
+	private TabsPagerAdapter mAdapter;
+	private ActionBar actionBar;
+	// Tab titles
+	private String[] tabs = { "Top Rated", "Games", "Movies" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,38 +28,42 @@ public class MainActivity extends TabActivity {
 	}
 
 	public void initUI() {
+
 		Countly.sharedInstance().init(MainActivity.this,
 				"https://cloud.count.ly", "53033767172bb08c52038fb6");
 
-		TabHost tabHost = getTabHost();
+		// Initilization
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		actionBar = getActionBar();
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
-		// Tab for Photos
-		TabSpec first_class = tabHost.newTabSpec("First");
-		// setting Title and Icon for the Tab
-		first_class.setIndicator("Photos",
-				getResources().getDrawable(R.drawable.icons_tab));
-		Intent photosIntent = new Intent(this, SampleClass1.class);
-		first_class.setContent(photosIntent);
+		viewPager.setAdapter(mAdapter);
+		actionBar.setHomeButtonEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		// Tab for Songs
-		TabSpec sec_class = tabHost.newTabSpec("Second");
-		sec_class.setIndicator("Songs",
-				getResources().getDrawable(R.drawable.icons_tab));
-		Intent songsIntent = new Intent(this, SampleClass2.class);
-		sec_class.setContent(songsIntent);
+		// Adding Tabs
+		for (String tab_name : tabs) {
+			actionBar.addTab(actionBar.newTab().setText(tab_name)
+					.setTabListener(this));
+		}
 
-		// Tab for Videos
-		TabSpec third_class = tabHost.newTabSpec("Third");
-		third_class.setIndicator("Videos",
-				getResources().getDrawable(R.drawable.icons_tab));
-		Intent videosIntent = new Intent(this, SampleClass3.class);
-		third_class.setContent(videosIntent);
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-		// Adding all TabSpec to TabHost
-		tabHost.addTab(first_class); // Adding photos tab
-		tabHost.addTab(sec_class); // Adding songs tab
-		tabHost.addTab(third_class); // Adding videos tab
+			@Override
+			public void onPageSelected(int position) {
+				// on changing the page
+				// make respected tab selected
+				actionBar.setSelectedNavigationItem(position);
+			}
 
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+			}
+		});
 	}
 
 	@Override
@@ -68,5 +78,23 @@ public class MainActivity extends TabActivity {
 		// TODO Auto-generated method stub
 		super.onStop();
 		Countly.sharedInstance().onStop();
+	}
+
+	@Override
+	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+		 viewPager.setCurrentItem(arg0.getPosition());
+	}
+
+	@Override
+	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+
 	}
 }
