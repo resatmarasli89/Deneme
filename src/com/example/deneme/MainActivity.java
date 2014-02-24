@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
 		Toast.makeText(MainActivity.this, " !!Hello Mars 11Bir1111!!!!",
 				Toast.LENGTH_SHORT).show();
 
-		Toast.makeText(MainActivity.this, "Bir toast da benden",
+		Toast.makeText(MainActivity.this, "Bir toast daha benden",
 				Toast.LENGTH_SHORT).show();
 
 		Countly.sharedInstance().init(MainActivity.this,
