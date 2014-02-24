@@ -23,6 +23,15 @@
             </intent-filter>
         </activity>
 
+        <!-- Songs Activity -->
+        <activity android:name="com.example.tabs.SampleClass1" />
+
+        <!-- Videos Activity -->
+        <activity android:name="com.example.tabs.SampleClass2" />
+
+        <!-- Photos Activity -->
+        <activity android:name="com.example.tabs.SampleClass3" />
+
         <service android:name="org.openudid.OpenUDID_service" >
             <intent-filter>
                 <action android:name="org.openudid.GETUDID" />
