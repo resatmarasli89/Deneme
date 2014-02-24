@@ -4,12 +4,12 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.example.adapters.TabsPagerAdapter;
 
-public class MainActivity extends FragmentActivity implements
+public class MainActivity extends SherlockFragmentActivity implements
 		ActionBar.TabListener {
 
 	private ViewPager viewPager;
